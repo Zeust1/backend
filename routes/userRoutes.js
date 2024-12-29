@@ -3,6 +3,7 @@ import { Router } from "express";
 
 const userRouter = Router()
 
-userRouter.route('/register').put(userController.register)
+userRouter.route('/register').post(userController.register)
+userRouter.route('/login').post(userController.login)
 
 export default userRouter

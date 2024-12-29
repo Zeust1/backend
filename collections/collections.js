@@ -1,5 +1,5 @@
 const collections = {
-    userData: "userData"
+    usersData: "usersdata"
 }
 
 export default collections

@@ -28,7 +28,6 @@ const userController = {
     },
     login: async (req, res) => {
         const {userName, password} = req.body
-        const getToken = req.headers['authorization']
         try {
             const validUserName = await userModel.findOne({userName: userName})
             if(!validUserName) throw new Error('username or password is incorrect')
@@ -39,9 +38,11 @@ const userController = {
                 email: validUserName.email,
                 phoneNumber: validUserName.phoneNumber
             }, process.env.SECRETKEY, {expiresIn: '2h'})
-            res.setHeader("Authorization", `Bearer ${token}`);
-            res.status(200).send('Login successfully')
-            console.log(getToken)
+            res.setHeader("Authorization", `Bearer ${token}`)
+            res.status(200).send({
+                success: 'Login successfully',
+                token: token
+            })
         } catch (error) {
             res.status(401).send(error.message)
         }

@@ -24,7 +24,7 @@ const tableController = {
     },
     getTable: async (req, res) => {
         try {
-            const table = await tableModel.findById({_id: '6772ea9893f8fe86d759171c'}).populate('listId', 'listName cardId')
+            const table = await tableModel.find().populate('listId', 'listName cardId')
             if(!table) throw new Error('Table not found')
             res.status(200).send({
                 success: 'Successfully',
